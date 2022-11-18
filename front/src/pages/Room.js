@@ -1,5 +1,6 @@
 import React, { useContext, useEffect} from 'react'
 import { useParams  } from 'react-router-dom'
+import  Navber  from '../components/Navber'
 import { RoomContext } from '../context/RoomContext'
 import {VideoPlayer} from '../components/VideoPlayer'
 import '../app.css'
@@ -12,7 +13,9 @@ export default function Room() {
   },[me,id,ws])
   console.log(peers)
   return (
-    <div className='container'>
+    <div >
+    <Navber/>
+      
     <div className='grid grid-cols-3 gap-3'>
       
     <VideoPlayer  stream={stream}/>
@@ -22,7 +25,8 @@ export default function Room() {
      
       ))} 
       
-  </div>
+      </div>
+      
     </div>
    
   )

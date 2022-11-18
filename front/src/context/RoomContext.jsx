@@ -14,6 +14,7 @@ const ws = socketIOClient(WS)
 export function ContextProvider ({children}){
     const Navigate = useNavigate()
     const [me, setMe]= useState()
+    const [son, setson]= useState(true)
     const [stream, setStream]=useState()
     const [peers,dispatch]=useReducer(peersReducer, {})
     const [screenShId, setScreenShId] = useState()
@@ -41,12 +42,24 @@ const screenShare=()=>{
     }
 }
 
+const couperson = ()=>{
+    if (son === false) {
+        setson(true)
+    }else {
+        setson(false)
+    }
+}
+
 
 
     useEffect(()=>{
 //crée un peer---------------------------------------------------------------------
          const meid = uuidV4()
-         const peer = new Peer(meid)
+         const peer = new Peer(meid,{
+            secure : true,
+            host : "my-app-webrtc-connexion.herokuapp.com",
+            port : 443,
+         })
          setMe(peer)
          try{
 // crée une video ------------------------------------------------------------
@@ -98,7 +111,7 @@ const screenShare=()=>{
         })
     },[me, stream])
     return(
-        <RoomContext.Provider value={{ws,me,stream,peers,screenShare}}>
+        <RoomContext.Provider value={{ws,me,stream,peers,screenShare,couperson,son}}>
             {children}
         </RoomContext.Provider>
     )
