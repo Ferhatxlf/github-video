@@ -1,11 +1,11 @@
-import React  from 'react'
-import CreateButton from './component/CreateButton';
-
-
-function App(){
+import CreateRoomButton from './components/CreateRoomButton'
+import './app.css'
+import './index.css'
+function App() {
   return (
     <div className="App">
-    </div>
+      <CreateRoomButton/>
+         </div>
   );
 }
 

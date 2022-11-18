@@ -1,0 +1,17 @@
+.container{
+    background-color: black;
+    
+    width:1200px;
+    height: 600px;
+
+}
+.videoClass{
+    width:400px;
+    height: 300px;
+
+}
+
+.vedio{
+    width:100%;
+    height: 100%;
+}

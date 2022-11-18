@@ -1,27 +1,56 @@
 const express = require('express')
 const http = require('http')
-const {Server} = require('socket.io')
-const cors = require('cors')
+const uuid =require('uuid')
 const indexHandler = require('./room/index')
-const port=5000
 const app=express()
-
-app.use(cors());
-const server = http.createServer(app)
-const  io = new Server(server, {
-	cors: {
+const server =http.createServer(app)
+const io = require('socket.io')(server,{
+    cors: {
 		origin: "*",
 		methods: [ "GET", "POST" ]
 	}
-});
-
-
+})
+const port=5000
+const rooms={};
+const leaveRoom =  (rooms,socket,{roomId,peerId})=>{
+    rooms[roomId]= rooms[roomId].filter((id) => id !== peerId )
+    socket.to(roomId).emit("user-disconnected",peerId)
+}
+//connectin a la socket
 io.on("connection",(socket)=>{
-console.log('client connected')
-indexHandler.roomHandler(socket);
-  socket.on ("disconnect",()=> {
-	console.log('client diconnected')
-  })
+    console.log('user connected')
+     
+    //cree une room
+	socket.on ("create-room",()=>{
+        const roomId= uuid.v4()
+        rooms[roomId]=[]
+        console.log('user create room')
+        socket.emit("room-created",{roomId})
+
+    })
+    socket.on("join-room", ({roomId, peerId})=>{
+        if (rooms[roomId]){
+            console.log('user joind a room',roomId + peerId)
+            rooms[roomId].push(peerId)
+            socket.join(roomId)
+            console.log('passer')
+            socket.to(roomId).emit("user-joined",{peerId})
+            socket.emit("get-users",{
+                roomId,
+                participants: rooms[roomId]
+            })
+        }
+        socket.on("disconnect",()=>{
+            console.log("user left the room",peerId);
+            leaveRoom(rooms,socket,{roomId,peerId})
+        })
+    })
+
+
+    socket.on("disconnect",()=>{
+        console.log('user disconnectd')
+    })
+
 })
 
 
