@@ -24,8 +24,9 @@ const switchStream =(stream)=>{
     if (screenShId === me._id){
         setScreenShId("")
     }else setScreenShId(me._id)
+
     // changer le flus video par le flus de l'écran--------------------------------------------------
-Object.values(me?.connections).forEach((connection)=>{
+    Object.values(me?.connections).forEach((connection)=>{
     const videoTrack = stream?.getTracks().find(track => track.kind === 'video');
     connection[0].peerConnection
     .getSenders()[1]
@@ -49,28 +50,21 @@ const couperson = ()=>{
         setson(false)
     }
 }
-
-
-
-    useEffect(()=>{
+useEffect(()=>{
 //crée un peer---------------------------------------------------------------------
          const meid = uuidV4()
-         const peer = new Peer(meid,{
-            secure : true,
-            host : "my-app-webrtc-connexion.herokuapp.com",
-            port : 443,
-         })
+         const peer = new Peer(meid)
          setMe(peer)
          try{
-// crée une video ------------------------------------------------------------
-            navigator.mediaDevices
-            .getUserMedia({video : true, audio: true})
-            .then((stream)=>{
-                setStream(stream)
-            })
-         }catch(err){
-            console.log(err)
-         }
+            // crée une video ------------------------------------------------------------
+                        navigator.mediaDevices
+                        .getUserMedia({video : true, audio: true})
+                        .then((stream)=>{
+                           setStream(stream)
+                       })
+                     }catch(err){ 
+                       console.log(err)
+                     }
 
  // ecouter l'event room-created et rejoindre la room---------------------    
         ws.on("room-created", ({roomId})=>{
