@@ -1,0 +1,8 @@
+.cont{
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    background-color: rgb(79, 82, 82);
+    width: 220px;
+    top: 50px;
+}

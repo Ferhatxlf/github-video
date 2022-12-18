@@ -5,10 +5,10 @@ function App() {
   return (
     <div>
       
-    <div className="App">
-      
       <CreateRoomButton/>
-         </div></div>
+     
+      
+    </div>
   );
 }
 

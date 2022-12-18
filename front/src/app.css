@@ -1,19 +1,56 @@
-.container{
-    background-color: black;
-    
-    width:1200px;
-    height: 600px;
 
+.video1{
+    width: 800px;
+    border-radius: 20px;
+    margin:3px;
 }
-.nav{
-    position: absolute;
-    top: 6px;
-    z-index: 2;
-    right: 80px;
+.video2{
+    width: 500px;
+    border-radius: 20px;
+    margin:3px;
 }
-.navlink{
-    margin: 0px 8px 0px 8px;
+.video3_4{
+    width: 400px;
+    border-radius: 20px;
+    margin:3px;
 }
-.navbar{
-    height: 50px;
+.video5_6{
+    width: 330px;
+    border-radius: 50px;
+    margin:3px;
 }
+.video7_9{
+    width: 270px;
+    border-radius: 15px;
+    margin:3px;
+}
+.video10_12{
+    width: 240px;
+    border-radius: 30px;
+    margin:3px;
+}
+.video13_20{
+    width: 180px;
+    border-radius: 15px;
+    margin:3px;
+}
+
+
+.stream{
+    display: inline-block;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+.btn{
+    position: fixed;
+    bottom: 0px;
+    right: 2px;
+}
+.chat{
+    position: fixed;
+    right: 0px;
+    height: 100%;
+    background-color: rgb(79, 82, 82);
+}
+
